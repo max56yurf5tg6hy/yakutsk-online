@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BY DANIIL · Рецепты, которые гавкают</title>
+<meta name="description" content="BY DANIIL — домашняя кулинарная книга: рецепты, категории, избранное и свои рецепты.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<style>
+  :root{
+    --font-ui:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+    --font-serif:Georgia,"Times New Roman",serif;
+    --accent:#c2410c;--accent-strong:#9a3412;
+    --bg:#17130f;--bg-soft:#201a14;--panel:#261f18;--panel-2:#332a1f;
+    --line:#3d3126;--ink:#f3ede3;--muted:#b3a68f;--btn-text:#ffffff;
+    --shadow:0 10px 28px rgba(0,0,0,.6);--accent-light:#f97316;--accent-bg:rgba(194,65,12,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-ui);background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent-light);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  header{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .top{display:flex;align-items:center;justify-content:space-between;height:62px;gap:14px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.03em;font-size:1.05rem}
+  .brand .name{display:flex;flex-direction:column;line-height:1.1}
+  .brand .name small{font-weight:600;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-light)}
+  .brand .ico{font-size:1.4rem}
+  .nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .nav a,.nav button{background:none;border:none;color:var(--muted);font:inherit;font-weight:600;font-size:.92rem;cursor:pointer;padding:8px 12px;border-radius:10px}
+  .nav a:hover,.nav button:hover{color:var(--ink);background:var(--panel)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:11px;font-weight:700;font-size:.92rem;border:1px solid var(--line);cursor:pointer;transition:.15s ease;font-family:inherit;background:var(--panel);color:var(--ink)}
+  .btn:hover{border-color:var(--accent-light);color:var(--accent-light);text-decoration:none}
+  .btn-primary{background:var(--accent);color:var(--btn-text);border-color:transparent}
+  .btn-primary:hover{background:var(--accent-strong);color:#fff}
+  .btn-ghost{background:transparent}
+  .btn-sm{padding:6px 12px;font-size:.82rem;border-radius:9px}
+  .btn-danger{border-color:#dc2626;color:#dc2626}
+  .btn-danger:hover{background:rgba(220,38,38,.12)}
+  .hero{background:radial-gradient(1200px 500px at 20% -10%,rgba(194,65,12,.22),transparent 60%);padding:70px 0 48px;text-align:center}
+  .hero .kicker{font-family:var(--font-serif);font-style:italic;color:var(--accent-light);font-size:1.05rem;margin-bottom:6px}
+  .hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.15;letter-spacing:-.01em;margin-bottom:12px}
+  .hero p{color:var(--muted);font-size:1.08rem;max-width:560px;margin:0 auto 24px}
+  .search{display:flex;gap:10px;max-width:520px;margin:0 auto;flex-wrap:wrap}
+  .search input{flex:1;min-width:220px;padding:13px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg-soft);color:var(--ink);font-family:inherit;font-size:1rem}
+  .search input:focus{outline:none;border-color:var(--accent-light)}
+  section{padding:34px 0}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  h2{font-size:1.55rem;letter-spacing:-.01em}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font:inherit;font-weight:600;font-size:.88rem;cursor:pointer;transition:.15s}
+  .chip:hover{color:var(--ink);border-color:var(--accent-light)}
+  .chip.active{background:var(--accent);color:#fff;border-color:transparent}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer;transition:.18s ease}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 32px rgba(0,0,0,.5)}
+  .card .thumb{height:150px;background:var(--panel-2);display:flex;align-items:center;justify-content:center;font-size:3.4rem;position:relative}
+  .card .thumb img{width:100%;height:100%;object-fit:cover}
+  .card .priv{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:var(--ink);font-size:.7rem;padding:4px 9px;border-radius:999px;backdrop-filter:blur(4px)}
+  .card .body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card .cat{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-light);font-weight:700}
+  .card h3{font-size:1.12rem;font-weight:800}
+  .card .desc{color:var(--muted);font-size:.9rem;flex:1}
+  .card .meta{display:flex;gap:14px;color:var(--muted);font-size:.82rem}
+  .card .meta span{display:inline-flex;align-items:center;gap:5px}
+  .empty{color:var(--muted);text-align:center;padding:50px 20px;border:1px dashed var(--line);border-radius:16px}
+  .empty b{color:var(--ink)}
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;z-index:100;overflow-y:auto}
+  .overlay.open{display:flex}
+  .modal{background:linear-gradient(180deg,var(--panel),var(--bg-soft));border:1px solid var(--line);border-radius:18px;max-width:720px;width:100%;box-shadow:var(--shadow)}
+  .modal .mhead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:22px 24px 0}
+  .modal .mhead .cat{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-light);font-weight:700}
+  .modal h2{font-size:1.7rem}
+  .modal .close{background:none;border:none;color:var(--muted);font-size:1.6rem;line-height:1;cursor:pointer;padding:4px 8px}
+  .modal .close:hover{color:var(--ink)}
+  .modal .mbody{padding:14px 24px 24px}
+  .mthumb{height:220px;background:var(--panel-2);display:flex;align-items:center;justify-content:center;font-size:5rem;border-radius:14px;margin:6px 0 18px;overflow:hidden}
+  .mthumb img{width:100%;height:100%;object-fit:cover}
+  .mmeta{display:flex;gap:18px;color:var(--muted);font-size:.88rem;flex-wrap:wrap;margin-bottom:16px}
+  .mmeta span{display:inline-flex;align-items:center;gap:6px}
+  .mrow{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:640px){.mrow{grid-template-columns:1fr}}
+  .mblock h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.07em;color:var(--accent-light);margin-bottom:10px}
+  .ingredients{list-style:none}
+  .ingredients li{border-bottom:1px dashed var(--line);padding:7px 0;color:var(--ink);font-size:.95rem;display:flex;justify-content:space-between;gap:10px}
+  .steps{list-style:none;counter-reset:st}
+  .steps li{counter-increment:st;position:relative;padding:0 0 14px 40px;border-bottom:1px dashed var(--line);margin-bottom:14px;color:var(--ink);font-size:.95rem}
+  .steps li:last-child{border:none;margin:0}
+  .steps li::before{content:counter(st);position:absolute;left:0;top:0;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .fav{border-color:var(--accent-light);color:var(--accent-light)}
+  .fav.on{background:var(--accent);color:#fff}
+  /* auth modal */
+  .auth-card{max-width:400px;margin:0 auto}
+  .field{margin-bottom:14px}
+  label{display:block;font-size:.84rem;font-weight:600;color:var(--muted);margin-bottom:6px}
+  input,select,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg-soft);color:var(--ink);font-family:inherit;font-size:.95rem}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent-light)}
+  textarea{resize:vertical}
+  .err{color:#dc2626;font-size:.85rem;min-height:1.2em;margin-top:6px}
+  .ok{color:#4ade80;font-size:.85rem;min-height:1.2em;margin-top:6px}
+  .switch{text-align:center;margin-top:14px;font-size:.9rem;color:var(--muted)}
+  .switch button{background:none;border:none;color:var(--accent-light);cursor:pointer;font-weight:700}
+  /* account */
+  .row-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+  .row-card h3{margin-bottom:12px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .form-grid .full{grid-column:1/-1}
+  @media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+  .user-pill{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--accent-light);font-size:.9rem}
+  .user-pill button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem}
+  footer{text-align:center;padding:26px 0 40px;color:var(--muted);font-size:.86rem;border-top:1px solid var(--line)}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--panel);border:1px solid var(--accent-light);color:var(--ink);padding:12px 20px;border-radius:11px;font-size:.9rem;transition:.25s ease;z-index:300;box-shadow:var(--shadow)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}.card{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+  <a class="brand" href="#" onclick="return false"><span class="ico">🐕</span><span class="name"><b>BY DANIIL</b><small>рецепты, которые гавкают</small></span></a>
+  <nav class="nav">
+    <a href="#catalog" onclick="go('catalog');return false">Рецепты</a>
+    <a href="#" onclick="openAuth();return false" id="navLink">Войти</a>
+    <span class="user-pill" id="userPill" style="display:none"></span>
+  </nav>
+</div></header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">домашняя кулинарная книга</div>
+    <h1>Рецепты, которые гавкают</h1>
+    <p>Проверенные домашние рецепты от BY DANIIL: соберите свою коллекцию, отмечайте любимые и добавляйте личные блюда.</p>
+    <form class="search" onsubmit="event.preventDefault();doSearch();">
+      <input type="search" id="q" placeholder="Поиск: борщ, торт, паста…" aria-label="Поиск рецептов">
+      <button type="submit" class="btn btn-primary">Найти</button>
+    </form>
+  </div>
+</section>
+
+<section id="catalog">
+  <div class="wrap">
+    <div class="bar">
+      <h2 id="listTitle">Все рецепты</h2>
+      <div><button class="btn btn-sm" id="showMineBtn" style="display:none" onclick="showMine()">Мои рецепты</button></div>
+    </div>
+    <div class="chips" id="catChips"></div>
+    <div class="grid" id="grid" style="margin-top:22px"></div>
+    <div class="empty" id="emptyBox" style="display:none"><b>Ничего не найдено.</b> Попробуйте другой запрос или сбросьте фильтры.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">BY DANIIL · Рецепты, которые гавкают</div>
+</footer>
+
+<!-- Auth modal -->
+<div class="overlay" id="authOverlay">
+  <div class="modal auth-card">
+    <div class="mhead"><h2 id="authTitle">Вход</h2><button class="close" onclick="closeAuth()" aria-label="Закрыть">×</button></div>
+    <div class="mbody">
+      <form id="authForm" novalidate>
+        <div class="field" id="nameField" style="display:none"><label for="a-name">Имя</label><input type="text" id="a-name" autocomplete="name" placeholder="Как вас зовут"></div>
+        <div class="field"><label for="a-email">Почта</label><input type="email" id="a-email" autocomplete="username" placeholder="you@mail.ru"></div>
+        <div class="field"><label for="a-pass">Пароль</label><input type="password" id="a-pass" autocomplete="current-password" placeholder="••••••••"></div>
+        <button type="submit" class="btn btn-primary btn-block" style="width:100%">Войти</button>
+        <div class="msg" id="authMsg"></div>
+      </form>
+      <div class="switch">Нет аккаунта? <button onclick="toggleMode()">Зарегистрироваться</button></div>
+      <div style="text-align:center;margin-top:8px"><button class="btn btn-sm" onclick="guest()">Гость (только смотреть)</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Recipe modal -->
+<div class="overlay" id="recOverlay">
+  <div class="modal">
+    <div class="mhead">
+      <div><span class="cat" id="m-cat"></span><h2 id="m-name"></h2></div>
+      <button class="close" onclick="closeRec()" aria-label="Закрыть">×</button>
+    </div>
+    <div class="mbody">
+      <div class="mthumb" id="m-thumb"></div>
+      <div class="mmeta" id="m-meta"></div>
+      <div class="mrow">
+        <div class="mblock"><h4>Продукты</h4><ul class="ingredients" id="m-ing"></ul></div>
+        <div class="mblock"><h4>Как готовить</h4><ol class="steps" id="m-steps"></ol></div>
+      </div>
+      <div class="actions">
+        <button class="btn fav" id="m-fav">♥ В избранное</button>
+        <button class="btn" id="m-edit" style="display:none">Редактировать</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Account / add-recipe modal -->
+<div class="overlay" id="editOverlay">
+  <div class="modal">
+    <div class="mhead"><h2 id="editTitle">Добавить рецепт</h2><button class="close" onclick="closeEdit()" aria-label="Закрыть">×</button></div>
+    <div class="mbody">
+      <form id="recipeForm" class="form-grid" novalidate>
+        <div class="field"><label for="r-name">Название *</label><input type="text" id="r-name" placeholder="Борщ по-домашнему"></div>
+        <div class="field"><label for="r-cat">Категория</label><input type="text" id="r-cat" placeholder="Супы"></div>
+        <div class="field full"><label for="r-desc">Описание</label><input type="text" id="r-desc" placeholder="Чем особенное блюдо?"></div>
+        <div class="field full"><label for="r-ing">Продукты (по одному на строку)</label><textarea id="r-ing" rows="3" placeholder="Свекла — 2 шт&#10;Картофель — 3 шт"></textarea></div>
+        <div class="field full"><label for="r-steps">Как готовить (по шагам)</label><textarea id="r-steps" rows="4" placeholder="Сварите бульон.&#10;Добавьте овощи."></textarea></div>
+        <div class="field"><label for="r-time">Время, мин</label><input type="number" id="r-time" value="30" min="0"></div>
+        <div class="field"><label for="r-serv">Порций</label><input type="number" id="r-serv" value="4" min="1"></div>
+        <div class="field"><label for="r-private">Приватность</label>
+          <select id="r-private"><option value="false">Общий</option><option value="true">Только для меня</option></select></div>
+        <div class="field"><label>Фото</label><input type="file" id="r-photo" accept="image/*"></div>
+        <div class="msg" id="rMsg"></div>
+        <div class="actions full" style="grid-column:1/-1;margin:0">
+          <button type="submit" class="btn btn-primary" id="saveRecipeBtn">Сохранить</button>
+          <button type="button" class="btn btn-danger" id="delRecipeBtn" style="display:none">Удалить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+  var SB_URL='https://wwfdcfiexzhsztvjkrei.supabase.co';
+  var SB_KEY='sb_publishable_UJAy6CcXncjDvCGKiPfhkQ_ukn9xlyy';
+  var AUTH_KEY='recipebook_session_token';
+
+  var state={me:null,token:'',mine:false,cat:'',q:'',editing:null,recipes:[]};
+
+  function toast(t){var el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('show');},2200);}
+  function sGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function sSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function sDel(k){try{localStorage.removeItem(k);}catch(e){}}
+  function token(){return state.token||sGet(AUTH_KEY)||'';}
+  function headers(){var h={'apikey':SB_KEY,'Content-Type':'application/json','Prefer':'return=representation'};h['Authorization']='Bearer '+(token()||SB_KEY);return h;}
+  function api(path,opt){return fetch(SB_URL+'/rest/v1/'+path,opt).then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error('db:'+r.status+(t?' '+t.slice(0,120):''));});return r.status===204?null:r.json();});}
+  function authApi(path,body){return fetch(SB_URL+'/auth/v1/'+path,{method:'POST',headers:{'apikey':SB_KEY,'Content-Type':'application/json','Authorization':'Bearer '+SB_KEY},body:JSON.stringify(body||{})}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error_description||j.msg||j.error||('auth:'+r.status));return j;});});}
+
+  function esc(s){return (s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+  function boot(){
+    restoreSession();
+    renderAuth();
+    loadCatalog();
+  }
+
+  function restoreSession(){
+    var t=token();
+    if(!t)return;
+    // user_id можно достать только через токен; попробуем my user
+    try{
+      var parts=t.split('.');
+      if(parts.length===3){var p=JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+        if(p.sub){state.me={id:p.sub,email:p.email||''};state.token=t;}}
+    }catch(e){}
+    if(state.me){
+      // подгружаем профиль (имя)
+      api('profiles?select=id,name,email&id=eq.'+state.me.id,{headers:headers()}).then(function(rows){
+        if(rows&&rows[0]){state.me.name=rows[0].name;state.me.email=rows[0].email;renderAuth();}
+      }).catch(function(){});
+    }
+  }
+
+  function renderAuth(){
+    var nav=document.getElementById('navLink'),pill=document.getElementById('userPill');
+    if(state.me){
+      nav.style.display='none';pill.style.display='inline-flex';
+      pill.innerHTML=esc(state.me.name||state.me.email||'аккаунт')+' <button onclick="logout()">Выйти</button>';
+      document.getElementById('showMineBtn').style.display='inline-flex';
+    }else{
+      nav.style.display='';pill.style.display='none';pill.innerHTML='';
+      document.getElementById('showMineBtn').style.display='none';
+    }
+  }
+
+  // --- catalog ---
+  function loadCatalog(){
+    var filters=[];
+    filters.push('or=(private.is.false,an.and(private.is.true,owner_id.eq.'+(state.me&&state.me.id||'000')+'))');
+    if(state.cat)filters.push('cat=eq.'+encodeURIComponent(state.cat));
+    if(state.q)filters.push(state.isFullTextSearch?('name=ilike.*'+encodeURIComponent(state.q)+'*'):'name=ilike.*'+encodeURIComponent(state.q)+'*');
+    var url='recipes?select=*&'+filters.join('&')+'&order=created_at.desc';
+    api(url,{headers:headers()}).then(function(rows){
+      state.recipes=rows||[];
+      renderChips();
+      renderGrid();
+    }).catch(function(e){
+      document.getElementById('grid').innerHTML='';
+      document.getElementById('emptyBox').style.display='block';
+      document.getElementById('emptyBox').innerHTML='<b>Не удалось загрузить рецепты.</b> '+esc(e&&e.message||'')+'<br><br><button class="btn btn-sm" onclick="loadCatalog()">Повторить</button>';
+    });
+  }
+
+  function renderChips(){
+    var chips=document.getElementById('catChips');
+    var cats=[];
+    api('recipes?select=cat&private=eq.false',{headers:headers()}).then(function(rows){
+      (rows||[]).forEach(function(r){if(r.cat&&cats.indexOf(r.cat)<0)cats.push(r.cat);});
+      cats.sort();
+      chips.innerHTML='';
+      var all=document.createElement('button');all.className='chip'+(state.cat===''?' active':'');all.textContent='Все';all.dataset.cat='';chips.appendChild(all);
+      cats.forEach(function(c){
+        var b=document.createElement('button');b.className='chip'+(state.cat===c?' active':'');b.textContent=c;b.dataset.cat=c;chips.appendChild(b);
+      });
+      chips.querySelectorAll('.chip').forEach(function(b){b.addEventListener('click',function(){state.cat=b.dataset.cat;state.mine=false;document.getElementById('listTitle').textContent=state.cat?('Категория: '+state.cat):'Все рецепты';loadCatalog();});});
+    }).catch(function(){});
+  }
+  window.doSearch=function(){state.q=document.getElementById('q').value.trim();state.mine=false;document.getElementById('listTitle').textContent=state.q?('Поиск: '+state.q):'Все рецепты';loadCatalog();};
+  window.showMine=function(){
+    if(!state.me){toast('Сначала войдите.');openAuth();return;}
+    state.mine=true;state.cat='';state.q='';document.getElementById('q').value='';
+    document.getElementById('listTitle').textContent='Мои рецепты';
+    loadCatalog();
+  };
+
+  function renderGrid(){
+    var grid=document.getElementById('grid'),empty=document.getElementById('emptyBox');
+    var rows=state.recipes;
+    if(!rows||!rows.length){grid.innerHTML='';empty.style.display='block';empty.innerHTML=state.mine?'<b>У вас пока нет своих рецептов.</b><br><br><button class="btn btn-primary" onclick="openEdit()">Добавить первый</button>':'<b>Ничего не найдено.</b> Попробуйте другой запрос или сбросьте фильтры.<br><br><button class="btn btn-sm" onclick="resetFilters()">Сбросить</button>';return;}
+    empty.style.display='none';
+    grid.innerHTML=rows.map(function(r){return cardHTML(r);}).join('');
+    grid.querySelectorAll('.card').forEach(function(el){el.addEventListener('click',function(){openRec(el.dataset.id);});});
+  }
+  window.resetFilters=function(){state.cat='';state.q='';state.mine=false;document.getElementById('q').value='';document.getElementById('listTitle').textContent='Все рецепты';loadCatalog();};
+
+  function emojiFor(name){
+    var s=(name||'').toLowerCase();
+    var map=[['борщ','🥘'],['суп','🍲'],['щи','🍲'],['лапш','🍜'],['паст','🍝'],['спагет','🍝'],['мяс','🥩'],['котлет','🍖'],['стейк','🥩'],['куриц','🍗'],['шашл','🍢'],['рыб','🐟'],['сёмг','🐟'],['уха','🍲'],['овощ','🥬'],['салат','🥗'],['каш','🥣'],['греч','🥣'],['рис','🍚'],['плов','🍚'],['картоф','🥔'],['пюр','🥔'],['блин','🥞'],['олад','🥞'],['сырник','🧀'],['пирог','🥧'],['торт','🍰'],['печен','🍪'],['кекс','🧁'],['пончик','🍩'],['морож','🍨'],['варень','🍯'],['джем','🍯'],['хлеб','🍞'],['булочк','🥐'],['круасс','🥐'],['яйц','🍳'],['омлет','🍳'],['завтрак','🍳'],['смуз','🥤'],['компот','🍹'],['напит','🍵'],['чай','🍵'],['десерт','🍮'],['вареник','🥟'],['пельмен','🥟'],['голубц','🥬'],['гуляш','🍲'],['жаркое','🍲'],['запекан','🍲']];
+    for(var i=0;i<map.length;i++){if(s.indexOf(map[i][0])>=0)return map[i][1];}
+    return '🍽️';
+  }
+
+  function cardHTML(r){
+    var em=emojiFor(r.name)+(r.private?' 🔒':'');
+    var meta='<div class="meta">';
+    if(r.time)meta+='<span>⏱ '+r.time+' мин</span>';
+    if(r.servings)meta+='<span>🍽 '+r.servings+'</span>';
+    meta+='</div>';
+    var thumb=r.photo?('<img src="'+esc(r.photo)+'" alt="'+esc(r.name)+'">'):('<span>'+emojiFor(r.name)+'</span>');
+    return '<div class="card" data-id="'+esc(r.id)+'" tabindex="0"><div class="thumb">'+(r.private?'<span class="priv">🔒 личный</span>':'')+thumb+'</div><div class="body"><div class="cat">'+esc(r.cat||'блюдо')+'</div><h3>'+esc(r.name)+'</h3><div class="desc">'+esc(r.description||'')+'</div>'+meta+'</div></div>';
+  }
+
+  // --- recipe modal ---
+  window.openRec=function(id){
+    api('recipes?select=*&id=eq.'+id,{headers:headers()}).then(function(rows){
+      if(!rows||!rows[0]){toast('Рецепт не найден.');return;}
+      showRec(rows[0]);
+    }).catch(function(e){toast('Ошибка загрузки рецепта.');});
+  };
+  function showRec(r){
+    var over=document.getElementById('recOverlay');
+    document.getElementById('m-cat').textContent=r.cat||'блюдо';
+    document.getElementById('m-name').textContent=r.name;
+    document.getElementById('m-thumb').innerHTML=r.photo?('<img src="'+esc(r.photo)+'" alt="'+esc(r.name)+'">'):'<span>'+emojiFor(r.name)+'</span>';
+    var meta='';
+    if(r.time)meta+='<span>⏱ '+r.time+' мин</span>';
+    if(r.servings)meta+='<span>🍽 '+r.servings+' порц.</span>';
+    if(r.owner&&r.owner.name)meta+='<span>👤 '+esc(r.owner.name)+'</span>';
+    document.getElementById('m-meta').innerHTML=meta;
+    var ing=r.ingredients?r.ingredients.split(/\n+/).filter(function(x){return x.trim();}):[];
+    document.getElementById('m-ing').innerHTML=ing.length?ing.map(function(x){var parts=x.split(/\s*\u2014\s*|\s*-\s*/,2);return '<li><span>'+esc(parts[0])+'</span><span>'+esc(parts[1]||'')+'</span></li>';}).join(''):'<li>—</li>';
+    var steps=r.steps?r.steps.split(/\n+/).filter(function(x){return x.trim();}):[];
+    document.getElementById('m-steps').innerHTML=steps.length?steps.map(function(s){return '<li>'+esc(s)+'</li>';}).join(''):'<li>—</li>';
+    var favBtn=document.getElementById('m-fav');
+    var isFav=isFavorite(r.id);
+    favBtn.textContent=isFav?'♥ В избранном':'♥ В избранное';
+    favBtn.classList.toggle('on',isFav);
+    favBtn.onclick=function(){toggleFav(r);};
+    var editBtn=document.getElementById('m-edit');
+    editBtn.style.display=(state.me&&r.owner_id===state.me.id)?'':'none';
+    editBtn.onclick=function(){closeRec();openEdit(r);};
+    over.classList.add('open');
+  }
+  window.closeRec=function(){document.getElementById('recOverlay').classList.remove('open');};
+
+  // --- favorites (localStorage) ---
+  function favKey(){return 'fav_'+((state.me&&state.me.id)||'guest');}
+  function getFavs(){try{return JSON.parse(localStorage.getItem(favKey())||'[]')||[];}catch(e){return [];}}
+  function isFavorite(id){return getFavs().indexOf(id)>=0;}
+  function toggleFav(r){
+    var list=getFavs();
+    if(isFavorite(r.id)){list=list.filter(function(x){return x!==r.id;});toast('Убрано из избранного');}
+    else{list.push(r.id);toast('Добавлено в избранное ♥');}
+    sSet(favKey(),JSON.stringify(list));
+    // обновляем кнопку
+    var b=document.getElementById('m-fav');
+    b.textContent=isFavorite(r.id)?'♥ В избранном':'♥ В избранное';
+    b.classList.toggle('on',isFavorite(r.id));
+  }
+
+  // --- auth ---
+  var mode='login';
+  window.openAuth=function(){mode='login';document.getElementById('authTitle').textContent='Вход';document.getElementById('nameField').style.display='none';document.getElementById('a-pass').setAttribute('autocomplete','current-password');var m=document.getElementById('authMsg');m.className='msg';m.textContent='';document.getElementById('authOverlay').classList.add('open');};
+  window.closeAuth=function(){document.getElementById('authOverlay').classList.remove('open');};
+  window.toggleMode=function(){
+    mode=mode==='login'?'signup':'login';
+    document.getElementById('authTitle').textContent=mode==='login'?'Вход':'Регистрация';
+    document.getElementById('nameField').style.display=mode==='signup'?'':'none';
+    document.getElementById('a-pass').setAttribute('autocomplete',mode==='login'?'current-password':'new-password');
+    var m=document.getElementById('authMsg');m.className='msg';m.textContent='';
+  };
+  window.guest=function(){state.me=null;state.token='';sDel(AUTH_KEY);renderAuth();closeAuth();toast('Вы вошли как гость.');loadCatalog();};
+
+  document.getElementById('authForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var m=document.getElementById('authMsg');
+    var email=document.getElementById('a-email').value.trim(),pass=document.getElementById('a-pass').value;
+    if(!email||!pass){m.textContent='Введите почту и пароль.';m.className='msg err';return;}
+    if(mode==='signup'){
+      var name=document.getElementById('a-name').value.trim();
+      if(pass.length<6){m.textContent='Пароль минимум 6 символов.';m.className='msg err';return;}
+      m.textContent='Создаю аккаунт…';m.className='msg';
+      authApi('signup',{email:email,password:pass,data:{name:name||email.split('@')[0]}}).then(function(res){
+        if(res.session&&res.session.access_token){
+          state.token=res.session.access_token;state.me={id:res.user.id,email:res.user.email,name:name||''};
+          return ensureProfile(name||'').then(function(){authDone();});
+        }
+        // подтверждение по почте
+        m.className='msg ok';m.textContent='Аккаунт создан. Проверьте почту для подтверждения, затем войдите.';
+      }).catch(function(x){m.className='msg err';m.textContent=x&&x.message||'Ошибка регистрации.';});
+    }else{
+      m.textContent='Проверяю…';m.className='msg';
+      authApi('token?grant_type=password',{email:email,password:pass}).then(function(res){
+        state.token=res.access_token;state.me={id:res.user.id,email:res.user.email};
+        api('profiles?select=id,name,email&id=eq.'+res.user.id,{headers:headers()}).then(function(rows){
+          if(rows&&rows[0])state.me.name=rows[0].name;
+          authDone();
+        }).catch(function(){authDone();});
+      }).catch(function(x){m.className='msg err';m.textContent=x&&x.message||'Неверная почта или пароль.';});
+    }
+  });
+
+  function ensureProfile(name){
+    if(!state.me)return Promise.resolve();
+    return api('profiles?on_conflict=id',{method:'POST',headers:headers({'Prefer':'resolution=merge-duplicates,return=minimal'}),body:JSON.stringify({id:state.me.id,email:state.me.email,name:name||state.me.name||''})}).then(function(){return null;}).catch(function(e){return null;});
+  }
+  function authDone(){
+    sSet(AUTH_KEY,state.token);
+    closeAuth();renderAuth();
+    toast('Добро пожаловать, '+(state.me.name||state.me.email||'')+'!');
+    loadCatalog();
+  }
+  window.logout=function(){state.me=null;state.token='';sDel(AUTH_KEY);renderAuth();state.mine=false;document.getElementById('listTitle').textContent='Все рецепты';loadCatalog();toast('Вы вышли.');};
+
+  // --- recipes CRUD ---
+  function fileToDataURL(file){
+    return new Promise(function(res,rej){
+      var fr=new FileReader();fr.onload=function(){res(fr.result);};fr.onerror=rej;fr.readAsDataURL(file);
+    });
+  }
+  window.openEdit=function(r){
+    if(!state.me){toast('Войдите, чтобы добавить рецепт.');openAuth();return;}
+    state.editing=r||null;
+    closeRec();
+    document.getElementById('editTitle').textContent=r?'Редактировать рецепт':'Добавить рецепт';
+    document.getElementById('r-name').value=r?r.name:'';
+    document.getElementById('r-cat').value=r?(r.cat||''):'';
+    document.getElementById('r-desc').value=r?(r.description||''):'';
+    document.getElementById('r-ing').value=r?(r.ingredients||''):'';
+    document.getElementById('r-steps').value=r?(r.steps||''):'';
+    document.getElementById('r-time').value=r?(r.time||30):30;
+    document.getElementById('r-serv').value=r?(r.servings||4):4;
+    document.getElementById('r-private').value=r?(r.private?'true':'false'):'false';
+    document.getElementById('r-photo').value='';
+    document.getElementById('delRecipeBtn').style.display=r?'':'none';
+    document.getElementById('rMsg').className='msg';document.getElementById('rMsg').textContent='';
+    document.getElementById('editOverlay').classList.add('open');
+  };
+  window.closeEdit=function(){state.editing=null;document.getElementById('editOverlay').classList.remove('open');};
+
+  document.getElementById('recipeForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!state.me){toast('Войдите.');return;}
+    var name=document.getElementById('r-name').value.trim();
+    var msg=document.getElementById('rMsg');
+    if(!name){msg.textContent='Укажите название рецепта.';msg.className='msg err';return;}
+    msg.textContent='Сохраняю…';msg.className='msg';
+    var photoInput=document.getElementById('r-photo');
+    function buildAndPost(photo){
+      var rec={id:state.editing?state.editing.id:('r_'+Date.now()+'_'+Math.floor(Math.random()*1e6)),owner_id:state.me.id,name:name,cat:document.getElementById('r-cat').value.trim()||null,description:document.getElementById('r-desc').value.trim()||'',ingredients:document.getElementById('r-ing').value.trim()||'',steps:document.getElementById('r-steps').value.trim()||'',time:parseInt(document.getElementById('r-time').value,10)||0,servings:parseInt(document.getElementById('r-serv').value,10)||2,private:document.getElementById('r-private').value==='true'};
+      if(photo){rec.photo=photo.dataUrl;rec.photo_name=photo.name;rec.photo_type=photo.type;}
+      api('recipes?on_conflict=id',{method:'POST',headers:headers({'Prefer':'resolution=merge-duplicates,return=minimal'}),body:JSON.stringify(rec)}).then(function(){
+        msg.className='msg ok';msg.textContent='Рецепт сохранён ✓';
+        setTimeout(function(){closeEdit();loadCatalog();},600);
+      }).catch(function(x){msg.className='msg err';msg.textContent='Ошибка сохранения: '+((x&&x.message)||'');});
+    }
+    var f=photoInput.files&&photoInput.files[0];
+    if(f){
+      fileToDataURL(f).then(function(durl){
+        buildAndPost({dataUrl:durl,name:f.name,type:f.type});
+      }).catch(function(){buildAndPost(null);});
+    }else buildAndPost(null);
+  });
+
+  document.getElementById('delRecipeBtn').addEventListener('click',function(){
+    if(!state.editing)return;
+    if(!confirm('Удалить рецепт «'+state.editing.name+'»?'))return;
+    api('recipes?id=eq.'+state.editing.id,{method:'DELETE',headers:headers()}).then(function(){
+      toast('Рецепт удалён');closeEdit();loadCatalog();
+    }).catch(function(){toast('Ошибка удаления');});
+  });
+
+  document.querySelectorAll('.overlay').forEach(function(ov){ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('open');});});
+
+  boot();
+})();
+</script>
+</body>
+</html>
